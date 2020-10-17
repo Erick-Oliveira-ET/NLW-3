@@ -18,13 +18,32 @@ interface Orphanage{
     name: string;
 }
 
+
 function OrphanageMap(){
+    
     const [orphanages, setOrphanages] = useState<Orphanage[]>([]);
+    const [latitude, setLatitude] = useState<number>(0);
+    const [longitude, setLongitude] = useState<number>(0);
 
     useEffect(()=>{
+    
+        navigator.geolocation.getCurrentPosition(local => {
+            setLatitude(local.coords.latitude);
+            setLongitude(local.coords.longitude);
+        }, error => {
+            console.error(error);
+        }, 
+        {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+        }
+        );
+        
         api.get('orphanages').then(res =>{
             setOrphanages(res.data);
         })
+    
     }, []);
 
     return (
@@ -46,7 +65,7 @@ function OrphanageMap(){
             </aside>
 
             <Map 
-                center={[-18.927571,-48.2692181]}
+                center={[latitude, longitude]}
                 zoom={15}
                 style={{
                     width: '100%',
