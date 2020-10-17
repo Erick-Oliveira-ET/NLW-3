@@ -15,6 +15,9 @@ A module to manage routers in react. The second module is for react to use the m
 ## leaflet and react-leaflet and @types/react-leaflet
 It's an alternative of using a map besides the Google Map's API. To make it prettier, it's used [mapbox](https://www.mapbox.com/) as a tilelayer.
 
+## axios 
+Make API requests.
+* Made a api.ts file to configure a base URL. This is useful because the fetch method doesn't have a base URL. So when it's necessary to change all the base urls, it needs to change one by one. 
 
 # Code Pecularities and Miscellaneous
 ## Tag 'a' and Link
