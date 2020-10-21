@@ -5,6 +5,7 @@ import Landing from './pages/Landing';
 import OrphanageMap from './pages/OrphanageMap';
 import Orphanage from './pages/Orphanage';
 import CreateOrphanage from './pages/CreateOrphanage';
+import CreatedOrphanage from './pages/CreatedOrphanage';
 
 function Routes() {
     //The switch is used to allow just one route at a time to be accessed
@@ -15,6 +16,7 @@ function Routes() {
                 <Route path="/app" component={OrphanageMap} />
                 
                 <Route path="/orphanages/create" component={CreateOrphanage} />
+                <Route path="/orphanages/created" component={CreatedOrphanage} />
                 <Route path="/orphanages/:id" component={Orphanage} />
             </Switch>
         </BrowserRouter>

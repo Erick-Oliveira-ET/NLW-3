@@ -1,0 +1,69 @@
+#container {
+    width: 100vw;
+    height: 100vh;
+    background: #37C77F;
+}
+
+#container .content-wrapper {
+    position: relative;
+
+    height: 100%;
+    width: 100%;
+
+
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#container .content-wrapper main {
+    max-width: 400px;
+    height: 300px;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#container .content-wrapper main h1 {
+    font-size: 76px;
+    font-weight: 900;
+    line-height: 70px;
+
+    align-content: center;
+}
+
+#container .content-wrapper main p {
+    font-size: 24px;
+    margin: 24px;
+    line-height: 34px;
+
+    text-align: center;
+}
+
+#container .content-wrapper img{
+    width: 300px;
+    height: 300px;
+}
+
+#container .content-wrapper main .map-button{
+    height: 64px;
+    width: 243px;
+    border-radius: 20px;
+    
+    color: #FFFFFF;
+    background: #31B272;
+    text-decoration: none;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: background 0.2s;
+}
+
+#container .content-wrapper main .map-button:hover{
+    background: #3BD689;
+}

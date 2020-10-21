@@ -72,11 +72,13 @@ export default function CreateOrphanage() {
       data.append('images', image);
     })
 
-    await api.post('orphanage', data);
+    const res = await api.post('orphanage', data);
 
-    history.push('/app')
+    if(res.status === 201){
+      history.push('/orphanages/created');
+    }
 
-
+    history.push('/app');
 
   }
 
