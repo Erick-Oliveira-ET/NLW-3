@@ -1,17 +1,13 @@
-import React from 'react';
-import { FormEvent } from 'react';
-import { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
 import logoVertical from '../images/logo-vertical.svg';
 
-import "../styles/pages/login.css";
+import "../styles/pages/new-password.css";
 
-const Login = () => {
+const NewPassword = () => {
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [remember, setRemeber] = useState('false');
 
     const onSubmitHandle = async (event: FormEvent) => {
         console.log(event);
@@ -40,7 +36,9 @@ const Login = () => {
 
                 <form onSubmit={onSubmitHandle} className="login-form">
                 
-                <h1>Fazer Login</h1>
+                <h1>Esqueci a Senha</h1>
+                <p>Sua redefinição de senha será enviada
+                    para o e-mail cadastrado.</p>
                 
                 <div className="input-block">
                     <label htmlFor="email">E-mail</label>
@@ -50,26 +48,6 @@ const Login = () => {
 
                 </div>
 
-                <div className="input-block">
-                    <label htmlFor="password">Senha</label>
-                    <input id="password" type="password" 
-                        value={password} onChange={event => setPassword(event.target.value)}
-                    />
-
-                </div>
-
-                <div className="login-input-block-footer">
-                    <div className="input-block checkbox">
-                        <input type="checkbox"
-                            value={remember} onChange={event => setRemeber(event.target.value)}
-                        />
-                        <label htmlFor="password" className="label-remember">Lembrar-me
-                        </label>
-                    </div>
-
-                    <Link to="/remember" className="login-remember"> Esqueci minha senha </Link>
-                </div>
-
                 <button type="submit">Entrar</button>
                 
                 </form>
@@ -77,8 +55,8 @@ const Login = () => {
             </div>
 
         </div>
-
     )
+
 }
 
-export default Login;
+export default NewPassword;

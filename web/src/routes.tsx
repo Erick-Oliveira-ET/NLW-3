@@ -7,6 +7,7 @@ import Orphanage from './pages/Orphanage';
 import CreateOrphanage from './pages/CreateOrphanage';
 import CreatedOrphanage from './pages/CreatedOrphanage';
 import Login from './pages/Login';
+import NewPassword from './pages/NewPassword';
 
 function Routes() {
     //The switch is used to allow just one route at a time to be accessed
@@ -21,6 +22,7 @@ function Routes() {
                 <Route path="/orphanages/:id" component={Orphanage} />
 
                 <Route path="/login" component={Login} />
+                <Route path="/newpassword" component={NewPassword} />
             </Switch>
         </BrowserRouter>
     );
