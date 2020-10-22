@@ -8,6 +8,7 @@ import CreateOrphanage from './pages/CreateOrphanage';
 import CreatedOrphanage from './pages/CreatedOrphanage';
 import Login from './pages/Login';
 import NewPassword from './pages/NewPassword';
+import NewPasswordVerifiedEmail from './pages/NewPasswordVerifiedEmail';
 
 function Routes() {
     //The switch is used to allow just one route at a time to be accessed
@@ -23,6 +24,8 @@ function Routes() {
 
                 <Route path="/login" component={Login} />
                 <Route path="/newpassword" component={NewPassword} />
+                <Route path="/newpasswordverifiedemail" component={NewPasswordVerifiedEmail} />
+
             </Switch>
         </BrowserRouter>
     );

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import logoVertical from '../images/logo-vertical.svg';
 
-import "../styles/pages/new-password.css";
+import "../styles/pages/new-password.css"
 
 const NewPassword = () => {
     const [email, setEmail] = useState('');
