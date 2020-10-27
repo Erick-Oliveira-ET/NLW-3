@@ -1,4 +1,4 @@
-import React, { FormEvent, MouseEvent, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
@@ -12,15 +12,6 @@ const NewPasswordVerifiedEmail = () => {
     const [passwordVerification, setPasswordVerification] = useState('');
     const [isPassVisib, setIsPassVisib] = useState(false);
     const [isPassVisibVerification, setIsPassVisibVer] = useState(false);
-
-    const handleEyeClick = (event: MouseEvent) => {
-        setIsPassVisib(!isPassVisib);
-    }
-
-    const handleEyeClickVer = (event: MouseEvent) => {
-        setIsPassVisibVer(!isPassVisibVerification);
-    }
-    
     
     const onSubmitHandle = async (event: FormEvent) => {
         console.log(event);
@@ -63,11 +54,17 @@ const NewPasswordVerifiedEmail = () => {
                     
                         
                         { isPassVisib ? 
-                            <AiOutlineEyeInvisible onClick={handleEyeClick} className="eyepassword" size={26} color="#15C3D6"/>
+                            <AiOutlineEyeInvisible 
+                                onClick={() => setIsPassVisib(!isPassVisib)} 
+                                className="eyepassword" size={26} color="#15C3D6"
+                            />
                         
                             :
                         
-                            <AiOutlineEye onClick={handleEyeClick} className="eyepassword" size={26} color="#8FA7B2"/>
+                            <AiOutlineEye 
+                                onClick={() => setIsPassVisib(!isPassVisib)}
+                                className="eyepassword" size={26} color="#8FA7B2"
+                            />
 
                         }
 
@@ -86,11 +83,17 @@ const NewPasswordVerifiedEmail = () => {
                         />
 
                         { isPassVisibVerification ? 
-                            <AiOutlineEyeInvisible onClick={handleEyeClickVer} className="eyepassword" size={26} color="#15C3D6"/>
+                            <AiOutlineEyeInvisible 
+                                onClick={() => setIsPassVisibVer(!isPassVisibVerification)} 
+                                className="eyepassword" size={26} color="#15C3D6"
+                            />
                         
                             :
                         
-                            <AiOutlineEye onClick={handleEyeClickVer} className="eyepassword" size={26} color="#8FA7B2"/>
+                            <AiOutlineEye 
+                                onClick={() => setIsPassVisibVer(!isPassVisibVerification)} 
+                                className="eyepassword" size={26} color="#8FA7B2"
+                            />
 
                         }
 

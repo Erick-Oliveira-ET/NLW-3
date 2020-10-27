@@ -1,7 +1,7 @@
 import React, { FormEvent, useState, ChangeEvent, useEffect } from "react";
 import { Map, Marker, TileLayer } from 'react-leaflet';
 import { LeafletMouseEvent } from "leaflet";
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 
 import { FiPlus } from "react-icons/fi";
@@ -11,37 +11,61 @@ import Sidebar from "../components/Sidebar";
 import mapIcon from "../utils/mapIcon";
 import api from "../services/api";
 
+interface Orphanage{
+  id: number;
+  latitude: number;
+  longitude: number;
+  name: string;
+  about: string;
+  instructions: string;
+  opening_hours: string;
+  open_on_weekends: string;
+  images: Array<{
+    id: number;
+    url: string;
+  }>
+}
 
-export default function CreateOrphanage() {
+interface OrphanageParams{
+  id: string;
+}
+
+const Edit = () => {
   const history = useHistory();
-  
+  const params = useParams<OrphanageParams>();
+  // const [orphanage, setOrphanage] = useState<Orphanage>();
+  // const [activeImageIndex, setActiveImageIndex] = useState(0);
+
+  const [id, setId] = useState<number>();
   const [position, setPosition] = useState({latitude: 0, longitude: 0 });
   const [name, setName] = useState('');
   const [about, setAbout] = useState('');
   const [instructions, setInstructions] = useState('');
   const [opening_hours, setOpeningHours] = useState('');
   const [open_on_weekends, setOpenOnWeekends] = useState(true);
-
+  
   const [images, setImages] = useState<File[]>([]);
   const [previewImages, setPreviewImages] = useState<string[]>([]);
+  
+  // const [latitude, setLatitude] = useState<number>(0);
+  // const [longitude, setLongitude] = useState<number>(0);
+  
+  useEffect(()=>{
+      api.get(`/orphanage/${params.id}`).then(res =>{
+          // setOrphanage(res.data);
+          console.log(res);
+          
+          setId(res.data.id);
+          setPosition({latitude: res.data.latitude, longitude: res.data.longitude});
+          setName(res.data.name);
+          setAbout(res.data.about);
+          setInstructions(res.data.instructions);
+          setOpeningHours(res.data.opening_hours);
+          setOpenOnWeekends(res.data.open_on_weekends);
+          setImages(res.data.images);
+      })
 
-  const [latitude, setLatitude] = useState<number>(0);
-  const [longitude, setLongitude] = useState<number>(0);
-
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(local => {
-      setLatitude(local.coords.latitude);
-      setLongitude(local.coords.longitude);
-    }, error => {
-        console.error(error);
-    }, 
-    {
-        enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 0
-    }
-    );
-  }, [])
+  }, [params.id]);
 
   function handleMapClick(event: LeafletMouseEvent){
     const {lat, lng} = event.latlng;
@@ -78,6 +102,7 @@ export default function CreateOrphanage() {
 
     const data = new FormData();
 
+    data.append('id', String(id));
     data.append('name',name);
     data.append('about', about);
     data.append('latitude', String(latitude));
@@ -90,16 +115,11 @@ export default function CreateOrphanage() {
       data.append('images', image);
     })
 
-    const res = await api.post('/orphanages', data);
-
-    console.log(res);
-    
+    const res = await api.put('/orphanages', data);
 
     if(res.status === 201){
-      history.push('/orphanages/created');
+      history.push('/dashboard');
     }
-
-    history.push('/app');
 
   }
 
@@ -114,7 +134,7 @@ export default function CreateOrphanage() {
             <legend>Dados</legend>
 
             <Map 
-              center={[latitude,longitude]} 
+              center={[position.latitude,position.longitude]} 
               style={{ width: '100%', height: 280 }}
               zoom={15}
               onClick={handleMapClick}
@@ -218,3 +238,4 @@ export default function CreateOrphanage() {
 }
 
 // return `https://a.tile.openstreetmap.org/${z}/${x}/${y}.png`;
+export default Edit;

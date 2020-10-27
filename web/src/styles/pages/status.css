@@ -1,0 +1,35 @@
+form.create-orphanage-form .button-status{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form.create-orphanage-form button.refuse-button {
+    margin-top: 64px;
+
+    margin-right: 20px;
+  
+    width: 100%;
+    height: 64px;
+    border: 0;
+    cursor: pointer;
+    background: #FF669D;
+    border-radius: 20px;
+    color: #FFFFFF;
+    font-weight: 800;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    transition: background-color 0.2s;
+  }
+  
+  form.create-orphanage-form button.refuse-button svg {
+    margin-right: 16px;
+  }
+  
+  form.create-orphanage-form button.refuse-button:hover {
+    background: #FE2573;
+  }
+  

@@ -34,9 +34,10 @@ export default function Orphanage() {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
   useEffect(()=>{
-      api.get(`orphanages/`).then(res =>{
+      api.get(`orphanages/${params.id}`).then(res =>{
           setOrphanage(res.data);
       })
+
   }, [params.id]);
 
   if (!orphanage){
@@ -85,7 +86,8 @@ export default function Orphanage() {
                 doubleClickZoom={false}
               >
                 <TileLayer 
-                  url={`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`}
+                  // `https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`
+                  url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 <Marker interactive={false} icon={mapIcon} position={[orphanage.latitude,orphanage.longitude]} />
               </Map>

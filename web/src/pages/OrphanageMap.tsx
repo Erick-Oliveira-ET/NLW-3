@@ -40,7 +40,7 @@ function OrphanageMap(){
         }
         );
         
-        api.get('orphanages').then(res =>{
+        api.get('orphanages/true').then(res =>{
             setOrphanages(res.data);
         })
     

@@ -2,19 +2,31 @@ import React from 'react';
 import { FormEvent } from 'react';
 import { useState } from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import logoVertical from '../images/logo-vertical.svg';
 
 import "../styles/pages/login.css";
 
-const Login = () => {
+import { useAuth } from '../context/auth';
+
+
+const Login: React.FC = () => {
+    const history = useHistory();
+
+    const { signIn } = useAuth();
+    
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [remember, setRemeber] = useState('false');
 
     const onSubmitHandle = async (event: FormEvent) => {
-        console.log(event);
+        event.preventDefault();
+        const isLoged = signIn(email, password);
+
+        if (isLoged) {
+            history.push('/');
+        }
     }
 
     return (
@@ -44,7 +56,7 @@ const Login = () => {
                 
                 <div className="input-block">
                     <label htmlFor="email">E-mail</label>
-                    <input id="email" 
+                    <input id="email" required
                         value={email} onChange={event => setEmail(event.target.value)}
                     />
 
@@ -52,7 +64,7 @@ const Login = () => {
 
                 <div className="input-block">
                     <label htmlFor="password">Senha</label>
-                    <input id="password" type="password" 
+                    <input id="password" type="password" required
                         value={password} onChange={event => setPassword(event.target.value)}
                     />
 
